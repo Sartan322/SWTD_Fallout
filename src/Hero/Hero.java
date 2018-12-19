@@ -99,17 +99,19 @@ public class Hero {
         switch(symbols[0]) {
             case "+":
                 if ((special[characteristic] + Integer.parseInt(symbols[1]) > MAX_COUNT || getPoints() - Integer.parseInt(symbols[1]) < 0)) {
-                    throw new IllegalArgumentException("У тебя не достаточно баллов улучшения! или Характеристика больше 10!");
+                   System.out.println("У тебя не достаточно баллов улучшения! или Характеристика больше 10!");
+                } else {
+                    special[characteristic] = special[characteristic] + Integer.parseInt(symbols[1]);
+                    setPoints(getPoints() - Integer.parseInt(symbols[1]));
                 }
-                special[characteristic] = special[characteristic] +  Integer.parseInt(symbols[1]);
-                setPoints(getPoints() - Integer.parseInt(symbols[1]));
                 break;
             case "-":
                 if (special[characteristic] - Integer.parseInt(symbols[1]) < MIN_COUNT || getPoints() + Integer.parseInt(symbols[1]) > MAX_COUNT) {
-                    throw new IllegalArgumentException("У тебя слишком много баллов для улучшения! или Характеристику сделать меньше нельзя!");
+                    System.out.println("У тебя слишком много баллов для улучшения! или Характеристику сделать меньше нельзя!");
+                } else {
+                    special[characteristic] = special[characteristic] - Integer.parseInt(symbols[1]);
+                    setPoints(getPoints() + Integer.parseInt(symbols[1]));
                 }
-                special[characteristic] = special[characteristic] - Integer.parseInt(symbols[1]);
-                setPoints(getPoints() + Integer.parseInt(symbols[1]));
                 break;
         }
     }
