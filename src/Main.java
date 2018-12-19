@@ -13,6 +13,6 @@ public class Main {
         FirstEvent first = new FirstEvent(hero);
         first.history();
         first.react();
-
+///something
     }
 }
