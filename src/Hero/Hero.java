@@ -44,7 +44,7 @@ public class Hero {
         this.intelligence = 5;
         this.agility = 5;
         this.luck = 5;
-        this.healthPoints = 15 + strange * 2;
+        this.healthPoints = 100 + strange * 2;
         special[0] = this.strange;
         special[1] = this.perception;
         special[2] = this.endurance;

@@ -137,7 +137,7 @@ public class FirstEvent  {
         while (dog.getHp()>0 && hero.getHealthPoints()>0) {
             dog.setHp(hero.attack());
             if (dog.getHp()<=0){
-                System.out.println("" + dog.getName() + "умирает");
+                System.out.println("" + dog.getName() + " " + "умирает");
                 break;
             }
             dog.attack();
@@ -146,7 +146,7 @@ public class FirstEvent  {
                 return false;
             }
         }
-        System.out.println("В ходе долгой битвы тебе удается победить вожака стаи. Остальные собаки поджав хвосты убегают.");
+        System.out.println("В ходе долгой битвы тебе удается победить вожака стаи. Остальные собаки, поджав хвосты убегают.");
         TimeUnit.SECONDS.sleep(2);
         heroHealthBuf -= hero.getHealthPoints();
         System.out.println("*В этой ситуации ты потерял" + heroHealthBuf + " очков здоровья, но получаешь 1 очко для улучшений параметров Special.");
