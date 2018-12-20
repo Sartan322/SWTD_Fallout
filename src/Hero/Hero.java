@@ -44,7 +44,7 @@ public class Hero {
         this.intelligence = 5;
         this.agility = 5;
         this.luck = 5;
-        this.healthPoints = 15 + strange*2;
+        this.healthPoints = 15 + strange * 2;
         special[0] = this.strange;
         special[1] = this.perception;
         special[2] = this.endurance;
@@ -92,14 +92,14 @@ public class Hero {
     }
 
     public void chekOnPoints(int characteristic) {
-        characteristic-=1;
+        characteristic -= 1;
         System.out.println("Что вы хотите сделать? (Увлеичить +X, уменьшить -X, где X это целое число <10");
         String changes = sc.next();
         String[] symbols = changes.split("");
-        switch(symbols[0]) {
+        switch (symbols[0]) {
             case "+":
                 if ((special[characteristic] + Integer.parseInt(symbols[1]) > MAX_COUNT || getPoints() - Integer.parseInt(symbols[1]) < 0)) {
-                   System.out.println("У тебя не достаточно баллов улучшения! или Характеристика больше 10!");
+                    System.out.println("У тебя не достаточно баллов улучшения! или Характеристика больше 10!");
                 } else {
                     special[characteristic] = special[characteristic] + Integer.parseInt(symbols[1]);
                     setPoints(getPoints() - Integer.parseInt(symbols[1]));
@@ -133,7 +133,7 @@ public class Hero {
 
             System.out.println("Вы хотите закончить распределение очков? 1 - да, 2 - нет");
             int x = sc.nextInt();
-            if(x==1){
+            if (x == 1) {
                 on = false;
             }
         }
@@ -141,34 +141,34 @@ public class Hero {
     }
 
 
-    public int attack(){
+    public int attack() {
         System.out.println("Чем вы хотите атаковать?");
         System.out.println("1 - Боевой нож");
         System.out.println("2 - 10мм Пистолет");
         int number = sc.nextInt();
         int chance;
         int plusDamage;
-        if(number==1){
-            plusDamage = random.nextInt(damageMiliMax-damageMiliMin);
+        if (number == 1) {
+            plusDamage = random.nextInt(damageMiliMax - damageMiliMin);
             chance = random.nextInt(100);
-            if(chance>80){
+            if (chance > 80) {
                 System.out.println("Критический удар!");
                 return damageMiliMax + 5;
             }
             return damageMiliMin + plusDamage;
-        }
-        else if (number==2){
-            plusDamage = random.nextInt(damageRangeMax-damageMiliMin);
+        } else if (number == 2) {
+            plusDamage = random.nextInt(damageRangeMax - damageMiliMin);
             chance = random.nextInt(100);
-            if(chance>80){
+            if (chance > 80) {
                 System.out.println("Критический удар!");
-                return damageRangeMax*2;
+                return damageRangeMax * 2;
             }
-            return damageRangeMin+plusDamage;
+            return damageRangeMin + plusDamage;
         }
         return 0;
     }
-    public String getHeroName(){
+
+    public String getHeroName() {
         return heroName;
     }
 

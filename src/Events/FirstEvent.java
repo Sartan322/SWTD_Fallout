@@ -1,5 +1,6 @@
 package Events;
 
+import Enemies.EnemyDog;
 import Hero.Hero;
 
 import java.sql.Time;
@@ -131,85 +132,22 @@ public class FirstEvent  {
 
     private boolean firstSituation() throws InterruptedException { //варик, если ты решишь напасть на них
         int heroHealthBuf = hero.getHealthPoints();
-        int hpLeader = 30;
-        int damageLeader = 4;
-        int hpFirst = 20;
-        int damageFirst = 2;
-        int hpSecond = 20;
-        int damageSecond = 2;
-        int hpBuf;
-        System.out.println("Ты уверенной походкой устремляешься на 3 собак");
-        while (hpFirst>0||hpLeader>0||hpSecond>0 && hero.getHealthPoints()>0) {
-            if (hpLeader > 0) {
-                System.out.println("Аттака вожака стаи.");
-                hpBuf = hpLeader;
-                hpLeader -= hero.attack();
-                hpBuf -= hpLeader;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpLeader <= 0) {
-                    System.out.println("***");
-                    System.out.println("Вожак умирает");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageLeader);
-                System.out.println("Собака нанесла вам - " + damageLeader + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+        System.out.println("Ты уверенной походкой устремляешься на вожака стаи");
+        EnemyDog dog = new EnemyDog("Вожак", hero);
+        while (dog.getHp()>0 && hero.getHealthPoints()>0) {
+            dog.setHp(hero.attack());
+            if (dog.getHp()<=0){
+                System.out.println("" + dog.getName() + "умирает");
+                break;
             }
-            if (hpFirst > 0) {
-                System.out.println("Аттака собаки справа");
-                hpBuf = hpFirst;
-                hpFirst -= hero.attack();
-                hpBuf -= hpFirst;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("Собака умирает");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageFirst);
-                System.out.println("Собака нанесла вам - " + damageFirst + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
-            }
-            if (hpSecond > 0) {
-                System.out.println("Аттака собаки слева");
-                hpBuf = hpSecond;
-                hpSecond -= hero.attack();
-                hpBuf -= hpSecond;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("Собака умирает");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageSecond);
-                System.out.println("Собака нанесла вам - " + damageSecond + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+            dog.attack();
+            if (hero.getHealthPoints() <= 0){
+                System.out.println("*ВЫ УМЕРЛИ*");
+                return false;
             }
         }
-        /*TimeUnit.SECONDS.sleep(2);
-        System.out.println("Вожак стаи кусает тебя за руку");
+        System.out.println("В ходе долгой битвы тебе удается победить вожака стаи. Остальные собаки поджав хвосты убегают.");
         TimeUnit.SECONDS.sleep(2);
-        System.out.println("Но ты не растерялся и вспомнил, что прихватил с собой нож");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("Ранив вожака, другие собаки начинают нападать на тебя");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("В ходе долгой битвы тебе удается победить собак");
-        TimeUnit.SECONDS.sleep(2);*/
         heroHealthBuf -= hero.getHealthPoints();
         System.out.println("*В этой ситуации ты потерял" + heroHealthBuf + " очков здоровья, но получаешь 1 очко для улучшений параметров Special.");
         hero.setPoints(hero.getPoints() + 1);
