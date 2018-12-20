@@ -1,5 +1,7 @@
 package Events;
 
+import Enemies.EnemyPeasant;
+import Enemies.EnemyRaider;
 import Hero.Hero;
 
 import java.util.Scanner;
@@ -73,80 +75,24 @@ public class SecondEvent {
             return true;
         }
 
-    private boolean firstSituation() throws InterruptedException { //варик, если ты решишь напасть на них
+    private boolean firstSituation() throws InterruptedException {
         int heroHealthBuf = hero.getHealthPoints();
-        int hpLeader = 30;
-        int damageLeader = 4;
-        int hpFirst = 20;
-        int damageFirst = 2;
-        int hpSecond = 20;
-        int damageSecond = 2;
-        int hpBuf;
-        System.out.println("Ты выбрал сторону рейдеров");
-        while (hpFirst > 0 || hpLeader > 0 || hpSecond > 0 && hero.getHealthPoints() > 0) {
-            if (hpLeader > 0) {
-                System.out.println("Ты видишь, как на поле битвы происходит столкновение трех крестьянинов и одного рейдера\n" +
-                        "Кажется, самое время вступить в битву. Ты набрасываешься сзади на одного из атакующих крестьян сзади, тем самым спасая рейдера от гибели.");
-                hpBuf = hpLeader;
-                hpLeader -= hero.attack();
-                hpBuf -= hpLeader;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpLeader <= 0) {
-                    System.out.println("***");
-                    System.out.println("Вы убили двух крестьянинов");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageLeader);
-                System.out.println("В ходе драки вы пострадали. Крестянины нанесли вам  " + damageLeader + "единицы урона");
-                if (hero.getHealthPoints() <= 0) {
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+        System.out.println("Ты выбрал сторону рейдеров. Ты двигаешься в сторону защищающихся от крестьянинов рейдеров.");
+        EnemyPeasant peasant = new EnemyPeasant("Крестьянин", hero);
+        while (peasant.getHp()>0 && hero.getHealthPoints()>0) {
+            peasant.setHp(hero.attack());
+            if (peasant.getHp()<=0){
+                System.out.println("" + peasant.getName() + "умирает");
+                break;
             }
-            if (hpFirst > 0) {
-                System.out.println("Удар рукой в голову");
-                hpBuf = hpFirst;
-                hpFirst -= hero.attack();
-                hpBuf -= hpFirst;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("один из крестьянинов погибает от ваших ударов");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageFirst);
-                System.out.println("Крестьянин нанес вам - " + damageFirst + "единицы урона");
-                if (hero.getHealthPoints() <= 0) {
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
-            }
-            if (hpSecond > 0) {
-                System.out.println("Удар ножом в грудь");
-                hpBuf = hpSecond;
-                hpSecond -= hero.attack();
-                hpBuf -= hpSecond;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("Крестьянин  умирает");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageSecond);
-                System.out.println("Крестьянин нанес вам - " + damageSecond + "единицы урона");
-                if (hero.getHealthPoints() <= 0) {
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+            peasant.attack();
+            if (hero.getHealthPoints() <= 0){
+                System.out.println("*ВЫ УМЕРЛИ*");
+                return false;
             }
         }
-
+        System.out.println("В этой схватке ты побил нескольких крестьянинов. Победа осталась за рейдерами");
+        TimeUnit.SECONDS.sleep(2);
         heroHealthBuf -= hero.getHealthPoints();
         System.out.println("*В этой ситуации ты потерял" + heroHealthBuf + " очков здоровья, но получаешь 1 очко для улучшений параметров Special.");
         hero.setPoints(hero.getPoints() + 1);
@@ -155,89 +101,37 @@ public class SecondEvent {
     }
 
 
-    private boolean secondSituation() throws InterruptedException { //варик, если ты решишь напасть на них
+
+
+
+    private boolean secondSituation() throws InterruptedException {
+
         int heroHealthBuf = hero.getHealthPoints();
-        int hpLeader = 30;
-        int damageLeader = 4;
-        int hpFirst = 20;
-        int damageFirst = 2;
-        int hpSecond = 20;
-        int damageSecond = 2;
-        int hpBuf;
-        System.out.println("Ты выбрал сторону крестьянинов");
-        while (hpFirst>0||hpLeader>0||hpSecond>0 && hero.getHealthPoints()>0) {
-            if (hpLeader > 0) {
-                System.out.println("Ты замечаешь, как на поле битвы крестьяне явно дают слабину.Кажется их моральный дух спадает все больше и больше \n"+
-                        "Но ты не можешь позволить им проиграть.\n"+
-                        "Заметив, чфлаг с крестьянским знаменем уже пал на землю, а знаменосец мертв, ты решаешь самоотверженно поднять его вверх.Благодаря твоим действиям, заметно\n "
-                        + "ощущается всеобщее вдохновение"
-                );
-                hpBuf = hpLeader;
-                hpLeader -= hero.attack();
-                hpBuf -= hpLeader;
-                System.out.println("Благодаря вашим действиям, рейдерам было нанесено " + hpBuf + "урона");
-                if (hpLeader <= 0) {
-                    System.out.println("***");
-                    System.out.println("как минимум 5 рейдеров мертвы");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageLeader);
-                System.out.println("Пока вы несли знамя, вас ранили. Вы потеряли  " + damageLeader + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+        System.out.println("Ты выбрал сторону крестьянинов. Увидев схватку крестьянина и рейдера, ты решаешьБ что настало время вступить в бой.");
+        EnemyRaider raider = new EnemyRaider("Рейдер", hero);
+        while (raider.getHp()>0 && hero.getHealthPoints()>0) {
+            raider.setHp(hero.attack());
+            if (raider.getHp()<=0){
+                System.out.println("" + raider.getName() + "умирает");
+                break;
             }
-            if (hpFirst > 0) {
-                System.out.println("Удар ножом в спину рейдера");
-                hpBuf = hpFirst;
-                hpFirst -= hero.attack();
-                hpBuf -= hpFirst;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("рейдер мертв");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageFirst);
-                System.out.println("Рейдер нанес вам - " + damageFirst + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
-            }
-            if (hpSecond > 0) {
-                System.out.println("Удар ножом в грудь");
-                hpBuf = hpSecond;
-                hpSecond -= hero.attack();
-                hpBuf -= hpSecond;
-                System.out.println("Вы нанесли - " + hpBuf + "урона");
-                if (hpSecond <= 0) {
-                    System.out.println("***");
-                    System.out.println("Рейдер умирает");
-                    System.out.println("***");
-                }
-                hero.setHealthPoints(hero.getHealthPoints() - damageSecond);
-                System.out.println("Рейдер нанес вам - " + damageSecond + "единицы урона");
-                if (hero.getHealthPoints()<=0){
-                    System.out.println("***");
-                    System.out.println("ВЫ УМЕРЛИ");
-                    System.out.println("***");
-                    return false;
-                }
+            raider.attack();
+            if (hero.getHealthPoints() <= 0){
+                System.out.println("*ВЫ УМЕРЛИ*");
+                return false;
             }
         }
-
+        System.out.println("Благодаря твоей помощи, Крестьяне смогли одолеть Рейдеров");
+        TimeUnit.SECONDS.sleep(2);
         heroHealthBuf -= hero.getHealthPoints();
         System.out.println("*В этой ситуации ты потерял" + heroHealthBuf + " очков здоровья, но получаешь 1 очко для улучшений параметров Special.");
         hero.setPoints(hero.getPoints() + 1);
         hero.setCharacteristics();
         return true;
     }
+
+
+
 
     private void thirdSituation() throws InterruptedException { //
         System.out.println("Ты скрылся за деревьями в лесу, чтобы не быть вовлеченным в противостояние");
