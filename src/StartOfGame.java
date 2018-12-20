@@ -4,8 +4,9 @@ import java.util.concurrent.TimeUnit;
 public class StartOfGame {
     public void history() throws InterruptedException {
         Scanner sc = new Scanner(System.in);
-        ost = new Audio("res/OST.wav",0.6);
+        ost = new Audio("C:/Users/Banga/OneDrive/Desktop/FalloutGame/SWTD_Fallout/res/OST.wav",0.6);
         ost.sound();
+        ost.setVolume();
         System.out.println("Добро пожаловать в игру Fallout Console Text Game.");
         TimeUnit.SECONDS.sleep(2);
         System.out.println("Вы выходец из убежища секретного Vault-Tec - Universiade Village №807");

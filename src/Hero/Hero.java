@@ -1,10 +1,13 @@
 package Hero;
 
+import Events.Audio;
+
 import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Hero {
+
     final Random random = new Random();
     Scanner sc = new Scanner(System.in);
     private int strange;
@@ -142,6 +145,7 @@ public class Hero {
 
 
     public int attack() {
+        pistol = new Audio("C:/Users/Banga/OneDrive/Desktop/FalloutGame/SWTD_Fallout/res/PISTOL.wav", 0.6);
         System.out.println("Чем вы хотите атаковать?");
         System.out.println("1 - Боевой нож");
         System.out.println("2 - 10мм Пистолет");
@@ -159,6 +163,7 @@ public class Hero {
         } else if (number == 2) {
             plusDamage = random.nextInt(damageRangeMax - damageMiliMin);
             chance = random.nextInt(100);
+            pistol.sound();
             if (chance > 80) {
                 System.out.println("Критический удар!");
                 return damageRangeMax * 2;
@@ -259,4 +264,6 @@ public class Hero {
     public void setActionPoints(int actionPoints) {
         this.actionPoints = actionPoints;
     }
+
+    public static Audio pistol;
 }

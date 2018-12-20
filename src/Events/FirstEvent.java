@@ -80,8 +80,8 @@ public class FirstEvent  {
             System.out.println("4. Попытаться растолкать собак");
         }
         System.out.println("Введи номер команды");
-        String NummberOfCommand = sc.next();
-        switch (NummberOfCommand) {
+        String nummberOfCommand = sc.next();
+        switch (nummberOfCommand) {
             case "1":
                 return this.firstSituation();
             case "2":
@@ -138,7 +138,7 @@ public class FirstEvent  {
             dog.setHp(hero.attack());
             if (dog.getHp()<=0){
                 System.out.println("" + dog.getName() + "умирает");
-                break;
+                return true;
             }
             dog.attack();
             if (hero.getHealthPoints() <= 0){

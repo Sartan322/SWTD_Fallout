@@ -4,16 +4,14 @@ import Hero.Hero;
 
 import java.util.Random;
 
-public class EnemyDog extends Enemy {
+public class EnemyRobot extends Enemy {
     final Random random = new Random();
-
-    public EnemyDog(String name, Hero hero) {
+    public EnemyRobot(String name, Hero hero) {
         super(name, hero);
-        this.hp = 20;
-        this.damageMin = 1;
-        this.damageMax = 4;
+        this.hp = 40;
+        this.damageMin = 3;
+        this.damageMax = 8;
     }
-
     public void attack() {
         int chance = random.nextInt(damageMax - damageMin);
         int chanceCrit = random.nextInt(100);
@@ -25,7 +23,6 @@ public class EnemyDog extends Enemy {
         System.out.println("" + name + "*наносит удар = " + damageMin + chance);
         hero.setHealthPoints(hero.getHealthPoints() - (damageMin + chance));
     }
-
     public int getHp() {
         return hp;
     }
