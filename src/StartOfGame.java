@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 public class StartOfGame {
     public void history() throws InterruptedException {
         Scanner sc = new Scanner(System.in);
-        ost = new Audio("res/OST.wav",0.6);
+        ost = new Audio("D:/FalloutGame/SWTD/res/OST.wav",0.6);
         ost.sound();
         System.out.println("Добро пожаловать в игру Fallout Console Text Game.");
         TimeUnit.SECONDS.sleep(2);
