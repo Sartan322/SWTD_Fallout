@@ -17,7 +17,7 @@ public class SecondEvent {
     public void history() throws InterruptedException {
         System.out.println("Выйдя из всей этой передряги, ты направился дальше.");
         System.out.println("О, юный подаван!, тебя ждет большой и сложный путь, чтобы понять что случилось и где все твои друзья.");
-        System.out.println("***(Голос из головы):" + hero.getHeroName() + "я вижу, что ты хочешь разобраться во всем этом! Следуй за красным клубком, который привидёт тебя к одной в хижине,\n" +
+        System.out.println("***(Голос из головы):" + hero.getHeroName() + " я вижу, что ты хочешь разобраться во всем этом! Следуй за красным клубком, который привидёт тебя к одной в хижине,\n" +
                 "в которой ты сможешь найти ответы на некоторые вопросы, которые у тебя явно накопились за сегодняшнее утро. GL, HF, путник!");
         TimeUnit.SECONDS.sleep(4);
         System.out.println("Хм, идти за клубком! Думаю, из этого ничего хорошего не выйдет, но тем не менее, у меня больше нет вариантов! Летс ду ит.");
@@ -82,7 +82,7 @@ public class SecondEvent {
         while (peasant.getHp() > 0 && hero.getHealthPoints() > 0) {
             peasant.setHp(hero.attack());
             if (peasant.getHp() <= 0) {
-                System.out.println("" + peasant.getName() + "умирает");
+                System.out.println("" + peasant.getName() + " умирает");
                 break;
             }
             peasant.attack();

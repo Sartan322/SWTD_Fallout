@@ -11,6 +11,7 @@ public class Main {
         Hero hero = new Hero();
         sg.history();
         FirstEvent first = new FirstEvent(hero);
+        first.history();
         first.react();
         SecondEvent second = new SecondEvent(hero);
         if (life) {
